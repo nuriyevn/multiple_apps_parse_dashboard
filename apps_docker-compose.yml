@@ -1,0 +1,90 @@
+version: '2'
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongo_data:/bitnami'
+  mongodb2:
+    image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongo_data2:/bitnami'
+  mongodb3:
+    image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongo_data3:/bitnami'
+  mongodb4:
+    image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongo_data4:/bitnami'
+  parse_app_foxtaxi:
+    image: 'bitnami/parse:latest'
+    ports:
+      - '1337:1337'
+    volumes:
+      - 'parse_app_foxtaxi_data:/bitnami'
+    environment:
+      - MONGODB_HOST=mongodb
+      - PARSE_APP_ID=foxtaxi
+      - PARSE_MASTER_KEY=mymasterKey1
+      - PARSE_HOST=foxtaxi
+    depends_on:
+      - mongodb
+  parse_app_apartico:
+    image: 'bitnami/parse:latest'
+    ports:
+      - '1336:1337'
+    volumes:
+      - 'parse_app_apartico_data:/bitnami'
+    environment:
+      - MONGODB_HOST=mongodb2
+      - PARSE_APP_ID=apartico
+      - PARSE_MASTER_KEY=mymasterKey2
+      - PARSE_HOST=apartico
+    depends_on:
+      - mongodb2
+  parse_app_watermon:
+    image: 'bitnami/parse:latest'
+    ports:
+      - '1335:1337'
+    volumes:
+      - 'parse_app_watermon_data:/bitnami'
+    environment:
+      - MONGODB_HOST=mongodb3
+      - PARSE_APP_ID=watermon
+      - PARSE_MASTER_KEY=mymasterKey3
+      - PARSE_HOST=watermon
+    depends_on:
+      - mongodb3
+  parse_app_english:
+    image: 'bitnami/parse:latest'
+    ports:
+      - '1334:1337'
+    volumes:
+      - 'parse_app_english_data:/bitnami'
+    environment:
+      - MONGODB_HOST=mongodb4
+      - PARSE_APP_ID=english
+      - PARSE_MASTER_KEY=mymasterKey4
+      - PARSE_HOST=english
+    depends_on:
+      - mongodb4
+volumes:
+  mongo_data:
+    driver: local
+  mongo_data2:
+    driver: local
+  mongo_data3:
+    driver: local
+  mongo_data4:
+    driver: local
+  parse_app_foxtaxi_data:
+    driver: local
+  parse_app_apartico_data:
+    driver: local
+  parse_app_watermon_data:
+    driver: local
+  parse_app_english_data:
+    driver: local
+
+      
+      
