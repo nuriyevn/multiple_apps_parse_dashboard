@@ -1,0 +1,20 @@
+version: '2'
+services:
+  parse-dashboard:
+    image: 'parseplatform/parse-dashboard'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '4040:4040'
+    volumes:
+      - 'parse_dashboard_data:/bitnami'
+    environment:
+      - PARSE_DASHBOARD_MASTER_KEY=mymasterKey1
+      - PARSE_DASHBOARD_USER_ID=admin
+      - PARSE_DASHBOARD_USER_PASSWORD=dashboard_admin777
+      - PARSE_DASHBOARD_ALLOW_INSECURE_HTTP=true
+      - PARSE_DASHBOARD_SERVER_URL=http://194.0.52.235:1337/parse
+      - PARSE_DASHBOARD_APP_ID=foxtaxi
+volumes:
+  parse_dashboard_data:
+    driver: local
